@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  title: TrailService
+  version: '1.0'
+paths:
+  /trails:
+    get:
+      summary: Get all trails
+      operationId: app.routes.get_trails
+      responses:
+        '200':
+          description: A list of trails
+    post:
+      summary: Create a new trail
+      operationId: app.routes.create_trail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrailCreate'
+      responses:
+        '201':
+          description: Trail created
+
+  /trails/{trail_id}:
+    parameters:
+      - name: trail_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a specific trail
+      operationId: app.routes.get_trail
+      responses:
+        '200':
+          description: Returns a single trail
+        '404':
+          description: Trail not found
+    put:
+      summary: Update a trail
+      operationId: app.routes.update_trail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrailCreate'
+      responses:
+        '200':
+          description: Trail updated successfully
+        '404':
+          description: Trail not found
+    delete:
+      summary: Delete a trail
+      operationId: app.routes.delete_trail
+      responses:
+        '204':
+          description: Trail deleted successfully
+        '404':
+          description: Trail not found
+
+components:
+  schemas:
+    TrailCreate:
+      type: object
+      properties:
+        TrailName:
+          type: string
+        TrailSummary:
+          type: string
+        TrailDescription:
+          type: string
+        Difficulty:
+          type: string
+        Location:
+          type: string
+        Length:
+          type: number
+        ElevationGain:
+          type: number
+        RouteType:
+          type: string
+        OwnerID:
+          type: integer
+        Pt1_Lat:
+          type: number
+        Pt1_Long:
+          type: number
+        Pt1_Desc:
+          type: string
+        Pt2_Lat:
+          type: number
+        Pt2_Long:
+          type: number
+        Pt2_Desc:
+          type: string

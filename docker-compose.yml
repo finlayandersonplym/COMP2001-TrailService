@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  trailservice:
+    build: .
+    container_name: trailservice_container
+    ports:
+      - '5000:5000'
+    env_file:
+      - .env
+    environment:
+      - DB_SERVER=${DB_SERVER}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - AUTH_API_URL=${AUTH_API_URL}
+    networks:
+      - trail_net
+
+networks:
+  trail_net:
+    driver: bridge
